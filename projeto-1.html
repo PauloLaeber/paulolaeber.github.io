@@ -1,0 +1,110 @@
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1, maximum-scale=1">
+
+    <head>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/menu.css">
+
+        <script src="js/menu.js"></script>
+
+	    <link rel="stylesheet" href="css/font-awesome-6/css/all.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>Desmantamento na Amazonia</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="row">
+                <div class="navegacao" >
+                    <div class="navegacao-botao" onclick="botaoMenuTransf(this), botaoMenuConteudo()">
+                        <div class="barra1"></div>
+                        <div class="barra2"></div>
+                        <div class="barra3"></div>
+                    </div>
+                    <div id="conteudo">
+                        <a class="conteudo-link" href="portfolio.html#">Início</a>
+                        <a class="conteudo-link" href="portfolio.html#projetos">Projetos</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="intro">
+            <div class="intro-overlay"></div>
+            <div class="intro-content">
+                <div class="row">
+                    <div style="width: 100%;">
+                        <h1>Desmatamento da Amazônia</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="Codigo1">
+            <div class="row">
+                <h1>Desmatamento da Amazônia nos anos de 2011 a 2021</h1>
+                <p>
+                    A Amazônia é considerado um dos nossos maiores tesouros nacionais, lar de inúmeras
+                    espécies de de plantas e animais e também um regulador importante do clima brasileiro.
+                    A Amazônia Legal se estende em uma área de 5.217.423 Km&sup2; em mais de 760 municípios 
+                    brasileiros em 9 estados.
+                </p>
+                <p>
+                    Recentemente há uma preocupação de que o desmatamento tem aumentado nos últimos anos, 
+                    chegando a um récorde histórico de desmatamento no ano de 2021. Neste projeto será 
+                    analisado os dados do <a href="http://www.obt.inpe.br/prodes/">PRODES</a> para 
+                    entender a estensão e evolução do desmatamento entre os anos de 2011 e 2021.
+                </p>
+                <p>
+                    Para já responder se houve aumento no desmatamento da Amazônia, temos os seguintes
+                    gráficos:
+                </p>
+                <div class="imgladoalado">
+                    <img src="Projetos/Desmatamento/lpSomaDesmAno.png" width="400" height="300" 
+                    style="opacity: 0.95;">
+                </div>
+                <div class="imgladoalado">
+                    <img src="Projetos/Desmatamento/lpDesmAno.png" width="400" height="300"
+                    style="opacity: 0.95;">
+                </div>
+                
+                <p>
+                    Nos últimos 10 anos houve um aumento de 10,32&percnt; no desmatamento da Amazônia 
+                    onde em apenas 2012 houve uma diminuição nem mesmo uma desaceleração no 
+                    desmatamento. No total já foi desmatado 826.106 Km&sup2; de área florestal até 2021.
+                </p>
+                <p>
+                    Cada estado é afetado em uma escala diferente dos outros, o estado do Mato Grosso, que 
+                    é estado fronteiriço da Amazônia Legal, teve 24,6&percnt; de sua área total desmatada. 
+                    Para compreender melhor o nível do desmatamento alcançado em 2021, calcula-se a porcentagem 
+                    da área estadual desmatada em relação a área total do estado: 
+                </p>
+                <img src="Projetos/Desmatamento/barpAreaDesmEst.png" width="400" height="300" 
+                style="opacity: 0.95;">
+                <p>
+                    Em um gráfico mais detalhado, podemos ver a situação de cada município registrado pelo 
+                    PRODES:
+                </p>
+                <img src="Projetos/Desmatamento/MapaDesmatamento.png" width="400" height="300"
+                style="opacity: 0.95;">
+                <p>
+                    Aproximadamente 3,6&percnt; dos municípios da Amazônia Legal foi desmatado e aproximadamente 
+                    30,2&percnt; estão pelo menos 60&percnt; de sua área total desmatada. Assim conclui-se que 
+                    a preocupação de que o desmatamento da Amazônia tem acelerado e que tem acelerado desde 2012, 
+                    aproximadamente 16,3&percnt; da Amazônia Legal está desmatada, ameaçando a biodiversidade 
+                    da floresta.
+                </p>
+            </div>
+            <div class="row" style="height: 200px;">
+                <h1> Anexo </h1>
+                <ul>
+                    <li><a href="http://www.obt.inpe.br/prodes/" class="conteudo-link">PRODES</a></li>
+                    <li><a class="conteudo-link" href="Projetos/Desmatamento/Desmatamento.ipynb"> Códigos usados para a análise</li>
+                </ul>
+            </div>
+        </section>
+    </body>
+</html>

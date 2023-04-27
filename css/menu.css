@@ -1,0 +1,54 @@
+.navegacao {
+	float: left;
+	display: block;
+	background: transparent;
+	position: relative;
+}
+
+.navegacao-botao {
+	float: left;
+	display: block;
+	background: transparent;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	top: 10px;
+	left: 10px;
+}
+
+.barra1, .barra2, .barra3 {
+	width: 35px;
+	height: 5px;
+	background-color: rgb(220, 241, 27);
+	margin: 6px 0;
+	transition: 0.4s;
+}
+.transf .barra1 {
+	transform: translate(0, 11px) rotate(-45deg);
+}
+.transf .barra2 {
+	opacity: 0;
+}
+.transf .barra3 {
+	transform: translate(0, -11px) rotate(45deg);
+}
+
+#conteudo {
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	font-size: 32px;
+	left: 50px;
+	top: 10px;
+}
+.conteudo-link {
+	display: block;
+	font-family: sans-serif;
+	text-decoration: none;
+	text-align: left;
+	background: transparent;
+	color: white;
+}
+.conteudo-link:hover {
+	color: rgb(220, 241, 27);
+}

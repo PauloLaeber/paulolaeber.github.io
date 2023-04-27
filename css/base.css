@@ -1,0 +1,86 @@
+html {
+	font-family: sans-serif;
+	background-color: rgb(20, 20, 20);
+}
+
+body {
+	margin: 0;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	min-height: 66px;
+	z-index: 600;
+}
+header .row {
+	position: relative;
+	min-height: 66px;
+}
+header .top-bar {
+	display: block;
+	background: transparent;
+	min-width: 220px;
+	min-height: 66px;
+	position: absolute;
+	left: 90px;
+	top: 0;
+}
+
+section {
+	background-color: rgb(20, 20, 20);
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	color: rgb(220, 241, 27);
+	text-align: center;
+	text-shadow: 0 0 20px rgb(0, 0, 0);
+	font-size: 40px;
+}
+
+p {
+	color: rgb(200, 200, 200);
+	text-align: left;
+	font-size: 1.3rem;
+}
+
+.row {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+#intro {
+	background: url(../david-pupaza-Q9-QEy1_jYI-unsplash.jpg) no-repeat center bottom;
+	background-size: cover;
+	background-attachment: fixed;
+	min-height: 720px;
+	display: table;
+	position: relative;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+
+.intro-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+}
+
+.intro-content {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.imgladoalado {
+	float: left;
+	margin-bottom: 20px;
+}
