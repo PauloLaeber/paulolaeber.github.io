@@ -1,0 +1,226 @@
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/caixa-de-codigo.css">
+
+        <script src="js/menu.js"></script>
+        <script src="js/caixa-de-codigo.js"></script>
+        <script src="https://kit.fontawesome.com/41107a9868.js" crossorigin="anonymous"></script>
+
+        <title>Análise de dados Netflix</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="faixa-navegacao">
+                <div class="navegacao" >
+                    <div class="navegacao-botao" onclick="botaoMenuTransf(this), botaoMenuConteudo()">
+                        <div class="barra1"></div>
+                        <div class="barra2"></div>
+                        <div class="barra3"></div>
+                    </div>
+                    <div id="conteudo">
+                        <a class="conteudo-link" href="#">Início</a>
+                        <a class="conteudo-link" href="#introdução">Introdução</a>
+                        <a class="conteudo-link" href="#projetos">Projetos</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="intro">
+            <div class="intro-overlay"></div>
+            <div class="intro-content">
+                <div class="row">
+                    <div style="width: 100%;">
+                        <h1>Análise de dados da Netflix</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row" style="margin-top: 100px; margin-bottom: 250px;">
+            <h1>Análise de dados da Netflix</h1>
+            <p>
+                Neste projeto vamos estar analisando os dados de visualizações da Netflix, usando os 
+                dados da minha família, com as contas anonimizadas. Você mesmo pode usar os seus 
+                dados, se tiver uma conta da Netflix, e efetuar as mesmas análises. Estarei fazendo as 
+                análises em python.
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    <span class="codigo" style="color: blueviolet;">import</span>
+                    pandas 
+                    <span class="codigo" style="color: blueviolet;">as</span>
+                    pd
+                    <br>
+                    dados = pd.read_csv(<span class="codigo" style="color: brown;">'ViewingActivity.csv'</span>)
+                    <br>
+                    dados.head()
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px;">
+                <img src="Projetos/Netflix/dados-head.png" style="width: 100%; height: auto;" title="Tabela 1">
+            </div>
+            <p>
+                Com a tabela e com a função <em>shape</em> vemos que a base de dados tem 10 colunas e 1606 linhas. 
+                Observe também que os valores da coluna <em>Duration</em> tem menos de dois minutos cada, isso será 
+                relevante depois na análise.
+            </p>
+            <p>
+                As colunas que temos nesta base tem as seguintes definições:
+                <ul>
+                    <li><em>'Profile Name'</em>: Indica o nome do perfil.</li>
+                    <li><em>'Start Time'</em>: Informa a data e o horário em que o usuário começou a visualizar.</li>
+                    <li><em>'Duration'</em>: Informa quanto tempo que o usuário visualizou.</li>
+                    <li><em>'Attributes'</em>: Informa como que o usuário interagiu com o conteúdo.</li>
+                    <li><em>'Title'</em>: O nome do filme o série assitido.</li>
+                    <li><em>'Supplemental Video Type'</em>: Indica o tipo de conteúdo que não seja uma série ou filme.</li>
+                    <li><em>'Device Type'</em>: O dispositivo usado para a visualização.</li>
+                    <li><em>'Bookmark'</em>: Indica quando a visualização foi interrompida</li>
+                    <li><em>'Country'</em>: O país onde a série ou filme foi assistida.</li>
+                </ul>
+            </p>
+            <p>
+                Antes de começarmos precisamos explorar os tipos de dados registrado pelo <em>pandas</em>, aplicando a função 
+                <em>dtypes</em> temos:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados.dtypes
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/dados-dtypes.png" title="Tabela 2">
+            </div>
+            <p>
+                vemos com a Tabela 2 que todas as colunas são variáveis do tipo <em>object</em> que nos vai atrapalhar a 
+                analisar dados com datas e horas. Para ajeitar isso é necessário converter as colunas <em>Duration</em> e 
+                <em>Start Time</em> para <em>timedelta</em> e <em>datetime</em> respectivamente:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados[<span class="codigo" style="color: brown;">'Duration'</span>] = pd.to_timedelta(dados[<span class="codigo" style="color: brown;">'Duration'</span>])
+                    <br>
+                    dados[<span class="codigo" style="color: brown;">'Bookmark'</span>] = pd.to_timedelta(dados[<span class="codigo" style="color: brown;">'Bookmark'</span>])
+                    <br>
+                    dados[<span class="codigo" style="color: brown;">'Start Time'</span>] = pd.to_datetime(dados[<span class="codigo" style="color: brown;">'Start Time'</span>])
+                    <br>
+                    dados.dtypes
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/dados-dtypes2.png" title="Tabela 3">
+            </div>
+            <p>
+                Agora podemos começar a fazer as análises sem problemas. Para começar podemos contar quantas interações que cada perfil 
+                teve com filmes e séries da Netflix. Para fazer isso, podemos usar a função <em>value_counts()</em> e o computador fará a 
+                conta:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados.value_counts()
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/dados-valuecounts.png" title="Tabela 4">
+            </div>
+            <p>
+                Podemos também visualizar os dados com <em>matplotlib</em>:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    <span class="codigo" style="color: blueviolet;">import</span> 
+                    matplotlib.pyplot 
+                    <span class="codigo" style="color: blueviolet;">as</span> 
+                    plt
+                    <br>
+                    dados.value_counts().plot(kind=<span class="codigo" style="color: brown;">'bar'</span>)
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/grafico-valuecounts.png" title="Figura 1">
+            </div>
+            <p>
+                Pela tabela 4 e figura 1 vemos que a conta é compartilhada entre mim (PAULO), meu pai, minha mãe e um esquilo (não sei 
+                como o esquilo conseguiu ter acesso). Evidentemente eu sou quem mais acessa e faz uso da Netflix, minha mãe e meu pai assistem 
+                juntos portanto o perfil dela não tem muitos acessos. Para analisar o tempo de use em cada perfil temos que usar a função 
+                <em>groupby()</em> e obtemos o seguinte:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados.groupby(<span class="codigo" style="color: brown;">'Profile Name'</span>)[<span class="codigo" style="color: brown;">'Duration'</span>].describe()
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/duration-describe.png" style="width: 100%; height: auto;" title="Tabela 5">
+            </div>
+            <p>
+                Para melhor entender o que está na tabela 5 precisamos de um boxplot, porém o tipo <em>timedelta64</em> não é suportado pelos 
+                pacotes gráficos e é necessário um tratamento especial nos dados para converter-los a um tipo manipulável pelos gráficos. 
+                Para o próximo gráfico a variável <em>Duration</em> será convertita a um <em>float64</em> em minutos
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    <span class="codigo" style="color: blueviolet;">import</span>
+                    seaborn
+                    <span class="codigo" style="color: blueviolet;">as</span>
+                    sns
+                    <br>
+                    <br>
+                    tempo = dados[[<span class="codigo" style="color: brown;">'Profile Name'</span>, <span class="codigo" style="color: brown;">'Duration'</span>]]
+                    <br>
+                    tempo[<span class="codigo" style="color: brown;">'Duration'</span>] = tempo[<span class="codigo" style="color: brown;">'Duration'</span>]/(1000000000*60)
+                    <br>
+                    <br>
+                    sns.boxplot(tempo, x = <span class="codigo" style="color: brown;">'Profile Name'</span>, y = <span class="codigo" style="color: brown;">'Duration'</span>)
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/duration-boxplot.png" title="Figura 2">
+            </div>
+            <p>
+                Pela figura 2 vemos que as distribuições a diferença entre as distribuições dos perfis mais utilizados é a variância 
+                do tempo de duração. Na minha caixa (PAULO) há bastante "outliers" pois gosto de assistir mais séries e de vez em quando 
+                assisto algum filme, portanto todos esses pontos são dados válidos.
+            </p>
+            <p>
+                Lembrando da observação feito no início desse artigo, vimos várias linhas com duração de visualizações medidas em poucos 
+                segundos, isso ocorre pois os poucos segundos onde uma prévia de alguma série (<em>HOOK</em>) ou trailers que acabam 
+                sendo mostrados e são contados nessa base de dados. A coluna <em>Supplemental Video Type</em> mostra se esse é o caso:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados.groupby(<span class="codigo" style="color: brown;">'Profile Name'</span>)[<span class="codigo" style="color: brown;">'Supplemental Video Type'</span>].value_counts()
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/svt-valuecounts.png" title="Tabela 6">
+            </div>
+            <p>
+                Assim, os valores mais precisos sobre os tempos de visualizações são:
+            </p>
+            <div class="caixa" style="width: 100%; height: auto; display: flex; color: white;">
+                <div class="caixa-python">
+                    dados = dados[dados[<span class="codigo" style="color: brown;">'Supplemental Video Type'</span>].isnull()]
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/duration-describecorretos.png" style="width: 100%; height: auto;" title="Tabela 5">
+            </div>
+            <div style="display: flex; margin-top: 20px; justify-content: center;">
+                <img src="Projetos/Netflix/duration-boxplotcorretos.png" title="Figura 2">
+            </div>
+        </div>
+
+        <div class="rodape-secundario">
+            <a class="rodape-link"
+            href="https://github.com/PauloLaeber"><i class="fa-brands fa-github"></i></a>
+            <a class="rodape-link" 
+            href="https://www.linkedin.com/in/paulo-renato-batista-laeber-799804196/"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="rodape-link"
+            href="mailto:paulo.batistalaeber@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </body>
+</html>

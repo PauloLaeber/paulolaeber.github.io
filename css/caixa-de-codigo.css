@@ -1,0 +1,104 @@
+.botao-abrir-caixa {
+    cursor: pointer;
+    display: block;
+    background: transparent;
+    width: auto;
+    height: 20px;
+    font-size: 20px;
+    margin: 10px;
+    color: blue;
+}
+.botao-abrir-caixa:hover {
+    color: white;
+}
+
+.caixa {
+	display: none;
+	border: 1px cornsilk solid;
+	border-radius: 10px;
+	background-color: rgb(50, 50, 50);
+}
+
+.cabecario-caixa {
+	display: block;
+	width: 100%;
+	height: 30px;
+	background-color: rgb(50, 50, 50);
+	border-bottom: 1px cornsilk solid;
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+.aba-1 {
+	display: flex;
+	float: left;
+	width: auto;
+	height: 100%;
+	background-color: rgb(50, 50, 50);
+	border-right: 1px cornsilk solid;
+	border-top-left-radius: inherit;
+	justify-content: center;
+	cursor: pointer;
+}
+.aba-2 {
+	display: flex;
+	float: left;
+	width: auto;
+	height: 100%;
+	background-color: rgb(50, 50, 50);
+	border-right: 1px cornsilk solid;
+	justify-content: center;
+	cursor: pointer;
+}
+.aba-1 p, .aba-2 p {
+	margin: auto;
+	font-size: 15px;
+	color: white;
+	padding: 5px;
+}
+.aba-1:hover, .aba-2:hover {
+	background-color: grey;
+}
+.botao-fechar-caixa {
+	display: flex;
+	float: right;
+	width: 30px;
+	height: 100%;
+	background-color: red;
+	border-left: 1px cornsilk solid;
+	border-top-right-radius: inherit;
+	cursor: pointer;
+    justify-content: center;
+}
+.botao-fechar-caixa p {
+    color: black;
+    font-size: 25px;
+    margin: auto;
+}
+.botao-fechar-caixa p:hover {
+    color: white;
+}
+
+.caixa-python {
+    display: block;
+    width: 90%;
+    height: auto;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	line-height: 1.5;
+	word-spacing: 5px;
+}
+.caixa-r {
+    display: none;
+    width: 90%;
+    height: auto;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow-wrap: break-word;
+}
+
+.codigo {
+	display: inline-block;
+	height: fit-content;
+}

@@ -6,13 +6,11 @@
     <head>
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/caixa-de-codigo.css">
 
         <script src="js/menu.js"></script>
-
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
-	    <link rel="stylesheet" href="css/font-awesome-6/css/all.css" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="js/caixa-de-codigo.js"></script>
+        <script src="https://kit.fontawesome.com/41107a9868.js" crossorigin="anonymous"></script>
 
         <title>Ciência de Dados</title>
     </head>
@@ -20,7 +18,7 @@
     <!-- Site Próprio-->
     <body>
         <header>
-            <div class="row">
+            <div class="faixa-navegacao">
                 <div class="navegacao" >
                     <div class="navegacao-botao" onclick="botaoMenuTransf(this), botaoMenuConteudo()">
                         <div class="barra1"></div>
@@ -29,6 +27,7 @@
                     </div>
                     <div id="conteudo">
                         <a class="conteudo-link" href="#">Início</a>
+                        <a class="conteudo-link" href="#introdução">Introdução</a>
                         <a class="conteudo-link" href="#projetos">Projetos</a>
                     </div>
                 </div>
@@ -39,27 +38,75 @@
             <div class="intro-overlay"></div>
             <div class="intro-content">
                 <div class="row">
-                    <div style="width: 100%;">
-                        <h1>Olá! Eu sou Paulo Renato</h1>
-                        <p> Atualmente sou estudante de estatística na UFES e aqui vou estar desenvolvendo 
-                            alguns projetos de ciência de dados para mostrar ao mundo a minha dedicação e 
-                            esforço para oferecer as melhores e mais precisas informações sobre o Brasil e 
-                            o mundo.
-                        </p>
-                    </div>
-                    
+                    <h1>Olá! Eu sou Paulo Renato</h1>
                 </div>
+                <div class="rodape-principal">
+                    <a class="rodape-link"
+                    href="https://github.com/PauloLaeber"><i class="fa-brands fa-github"></i></a>
+                    <a class="rodape-link" 
+                    href="https://www.linkedin.com/in/paulo-renato-batista-laeber-799804196/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a class="rodape-link"
+                    href="mailto:paulo.batistalaeber@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="introdução">
+            <div class="row">
+                <h1>Um pouco sobre mim...</h1>
+                <p> 
+                    Atualmente sou estudante de estatística na UFES e aqui vou estar desenvolvendo 
+                    alguns projetos de ciência de dados para mostrar ao mundo a minha dedicação e 
+                    esforço para oferecer as melhores e mais precisas informações sobre o Brasil e 
+                    o mundo.
+                </p>
             </div>
         </section>
 
         <section id="projetos">
             <div class="row">
                 <h1>Projetos</h1>
-                <ul>
-                    <li><a class="conteudo-link" href="projeto-1.html" style="font-size: 1.3rem;">
-                        Desmatamento da Amazônia 2011-2021
-                    </a></li>
-                </ul>
+                <div class="centro">
+                    <div
+                    style="display: block; border: 1px cornsilk solid; width: 800; height: 140;
+                    background-color: rgb(50,50,50); margin-top: 50px;"
+                    >
+                        <a class="conteudo-link" 
+                        style="font-size: 30px; margin-left: 10px; margin-top: 10px; color: orangered;"
+                        href="projeto-1.html"
+                        >
+                            Desmatamento da Amazônia
+                        </a>
+                        <p style="font-size: 12px; color: lightgray; margin-left: 10px; margin-top: 0;">
+                            27/04/2023
+                        </p>
+                        <p style="font-size: 14px; color: cornsilk; margin-left: 10px;">
+                            A Amazônia é considerado um dos nossos maiores tesouros nacionais, lar de inúmeras
+                            espécies de de plantas e animais e também um regulador importante do clima brasileiro.
+                            Porém recentemente há reportagens preocupantes sobre a Amazônia e neste artigo vamos tentar 
+                            entender a extensão do desmatamento.
+                        </p>
+                    </div>
+                </div>
+                <div class="centro">
+                    <div
+                    style="display: block; border: 1px cornsilk solid; width: 800; height: 140;
+                    background-color: rgb(50,50,50); margin-top: 50px;"
+                    >
+                        <a class="conteudo-link" 
+                        style="font-size: 30px; margin-left: 10px; margin-top: 10px; color: orangered;"
+                        href="projeto-2.html"
+                        >
+                            Análise de dados da Netflix
+                        </a>
+                        <p style="font-size: 12px; color: lightgray; margin-left: 10px; margin-top: 0;">
+                            25/05/2023
+                        </p>
+                        <p style="font-size: 14px; color: cornsilk; margin-left: 10px;">
+                            Uma análise descritiva simples de dados da Netflix
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     </body>
