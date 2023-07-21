@@ -1,0 +1,252 @@
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1, maximum-scale=1">
+
+    <head>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/caixa-de-codigo.css">
+
+        <script src="js/menu.js"></script>
+        <script src="js/caixa-de-codigo.js"></script>
+        <script src="https://kit.fontawesome.com/41107a9868.js" crossorigin="anonymous"></script>
+        
+        <title>Classificação de qualidade de café com SVM</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="faixa-navegacao">
+                <div class="navegacao" >
+                    <div class="navegacao-botao" onclick="botaoMenuTransf(this), botaoMenuConteudo()">
+                        <div class="barra1"></div>
+                        <div class="barra2"></div>
+                        <div class="barra3"></div>
+                    </div>
+                    <div id="conteudo">
+                        <a class="conteudo-link" href="portfolio.html#">Início</a>
+                        <a class="conteudo-link" href="portfolio.html#projetos">Projetos</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="intro">
+            <div class="intro-overlay"></div>
+            <div class="intro-content">
+                <div class="row">
+                    <div style="width: 100%;">
+                        <h1>Classificação de qualidade de café com SVM</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row">
+            <h1>Classificação de qualidade de café com SVM</h1>
+
+            <p>
+                O café é uma das bebidas mais degustadas do mundo, sendo em alguns momentos nos anos 80 o segundo produto mais negociado do mundo. A paixão é tanta que há um dia mundial dedicado 
+                ao café, dia 13/04. Com essa paixão vem a demanda de cafés mais gostosos e de qualidade mais alta. Daí que vem uma organização chamada CQI.
+            </p>
+            <p>
+                O CQI, ou Coffee Quality Institute, é uma organização sem fins lucrativos que trabalha para melhorar a qualidade e o valor do café em todo o mundo. A missão do CQI é promover a 
+                qualidade do café por meio de uma série de atividades que incluem pesquisa, treinamento e programas de certificação de cafeicultores, processadores, torrefadores e outras pessoas 
+                interessadas em participar no esforço.
+            </p>
+            <p>
+                O CQI mantém um banco de dados na web que serve como recurso para profissionais e entusiastas do café interessados em aprender sobre qualidade e sustentabilidade do café. O banco 
+                de dados inclui uma série de informações sobre produção, processamento e avaliação sensorial do café. Para este artigo, teremos interesse nas variáveis de avaliação sensorial e 
+                de defeitos presentes no café.
+            </p>
+            <p>
+                Neste artigo, usaremos o SVC do <em>scikit-learn</em> para classificar a qualidade do café registrado na base de dados do CQI por país.
+            </p>
+            <p>
+                As avaliações sensoriais são as seguintes:
+
+                <ul>
+                    <li><em>Aroma</em>: Refere-se ao cheiro ou fragrância do café.</li>
+                    <li><em>Flavor</em>: O sabor do café é avaliado com base no sabor, incluindo doçura, amargor, acidez e outras notas de sabor.</li>
+                    <li><em>Aftertaste</em>: Refere-se ao sabor persistente que permanece na boca após engolir o café.</li>
+                    <li><em>Acidity</em>: A acidez no café refere-se ao brilho ou vivacidade do sabor.</li>
+                    <li><em>Body</em>: O corpo do café refere-se à espessura ou viscosidade do café na boca.</li>
+                    <li><em>Balance</em>: Equilíbrio refere-se a quão bem os diferentes componentes do sabor do café funcionam juntos.</li>
+                    <li><em>Uniformity</em>: A uniformidade refere-se à consistência do café de chávena para chávena.</li>
+                    <li><em>Clean_Cup</em>: Um copo limpo refere-se a um café livre de qualquer sabor ou defeito, como acidez, mofo ou ranço.</li>
+                    <li><em>Sweetness</em>: Pode ser descrito como semelhante a caramelo, frutado ou floral, e é uma qualidade desejável no café.</li>
+                    <li><em>Overall</em>: Um resumo de todas as outras avaliações em uma única variável.</li>
+                </ul>
+            </p>
+            <p>
+                E os defeitos avaliados são:
+
+                <ul>
+                    <li><em>Category_One_Defects</em>: são defeitos primários que podem ser percebidos através da inspeção visual dos grãos de café.</li>
+                    <li><em>Category_Two_Defects</em>: são defeitos secundários, mais sutis e só podem ser detectados por meio da degustação.</li>
+                </ul>
+            </p>
+
+            <h2 style="font-size: 30px; color: rgb(220, 241, 27); text-align: center; margin-bottom: 20px;">Análise exploratória</h2>
+
+            <p>
+                Em um todo a base de dados terá as seguintes variáveis:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        <span class="codigo" style="color: blueviolet;">import</span> pandas <span class="codigo" style="color: blueviolet;">as</span> pd <br>
+                        <span class="codigo" style="color: blueviolet;">import</span> numpy <span class="codigo" style="color: blueviolet;">as</span> np <br>
+                        <br>
+                        dados = pd.read_csv(<span class="codigo" style="color: darkorange;">'cafe.csv'</span>)<br>
+                        dados.head()
+                    </div>  
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/head_dados.png" style="width: 100%; height: auto;" title="Tabela 1">
+                </div>
+            </p>
+            <p>
+                Já na tabela 1 há a presença de valores nulos, o que vai nos atrapalhar na análise. Aplicando um algorítmo de detecção e quantificação de valores nulos 
+                revela quais variáveis são problemáticas:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        dados.isna().sum().sort_values(ascending=False)
+                    </div>  
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/info_dados.png" style="width: auto; height: auto;" title="resultado 1">
+                </div>
+            </p>
+            <p>
+                Totalizando 9 colunas com valores nulos cujo as linhas serão removidas. Como a coluna <em>ICO Number</em> tem uma quantidade muito grande de valores nulos, 
+                ela será removida inteiramente:
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        dados.drop([<span class="codigo" style="color: darkorange;">'ICO Number'</span>], axis=1, inplace=True)<br>
+                        dados.dropna(how=<span class="codigo" style="color: darkorange;">'any'</span>, axis=0, inplace=True)
+                    </div>  
+                </div>
+            </p>
+            <p>
+                Para analisar as variáveis de interesse podemos usar o boxplot para visualisar a distribuição das avaliações e defeitos (as variáveis <em>Sweetness</em> e 
+                <em>Clean Cup</em> não foram incluídas pois são constantes):
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/bp1.png" style="width: 50%; height: auto;" title="Tabela 2">
+                    <img src="Projetos/cafe/bp2.png" style="width: 50%; height: auto;" title="Tabela 3">
+                </div>
+            </p>
+
+            <h2 style="font-size: 30px; color: rgb(220, 241, 27); text-align: center; margin-bottom: 20px;">Modelagem com SVC</h2>
+
+            <p>
+                Antes de começar a modelagem, perceba que não temos um ponto de vista para classificar um café bom, portanto vamos dividir a qualidade do café a partir da variável 
+                <em>Overall</em> pela média da mesma variável. Esta divisão irá resultar em cafés acima e abaixo da média:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        dados[<span class="codigo" style="color: darkorange;">'Acima da média'</span>] = (dados[<span class="codigo" style="color: darkorange;">'Overall'</span>] >= np.mean(dados[<span class="codigo" style="color: darkorange;">'Overall'</span>]))*1
+                    </div>  
+                </div>
+            </p>
+            <p>
+                Daqui podemos começar a modelagem. As ferramentas que vamos precisar são: O próprio SVC, <em>confusion_matrix</em>, <em>classification_report</em> e <em>train_test_split</em>. 
+                O código deverá ser o seguinte:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        <span class="codigo" style="color: blueviolet;">from</span> sklearn.svm <span class="codigo" style="color: blueviolet;">import</span> SVC <br>
+                        <span class="codigo" style="color: blueviolet;">from</span> sklearn.metrics <span class="codigo" style="color: blueviolet;">import</span> confusion_matrix, classification_report <br>
+                        <span class="codigo" style="color: blueviolet;">from</span> sklearn.model_selection <span class="codigo" style="color: blueviolet;">import</span> train_test_split
+                    </div>  
+                </div>
+            </p>
+            <p>
+                Eu decidi formar um modelo geral, em vez de um modelo para cada país, para reduzir o custo computacional e ver como um modelo geral se segura em casos específicos. 
+                Aplicando o <em>train_test_split</em> e modelando o SVC com parâmetros simples temos:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        X = dados[[<span class="codigo" style="color: darkorange;">'Aroma', 'Flavor', 'Aftertaste', 'Acidity', 'Body', 'Balance', 'Uniformity', 'Category One Defects', 'Category Two Defects'</span>]] <br>
+                        Y = dados[<span class="codigo" style="color: darkorange;">'Acima_da_Media'</span>] <br>
+                        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.15) <br>
+                        <br>
+                        svc = SVC(kernel=<span class="codigo" style="color: darkorange;">'linear'</span>, random_state=None) <br>
+                        svc.fit(X_train, Y_train) <br>
+                        Y_pred = svc.predict(X_test)
+                    </div>  
+                </div>
+            </p>
+            <p>
+                Assim, o modelo chegou ao seguinte intercepto e coeficientes:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        print(svc.intercept_.round(2), svc.coef_.round(2))
+                    </div>  
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/intercept-coef.png" style="width: 100%; height: auto;" title="Resultado 2">
+                </div>
+            </p>
+            <p>
+                Com o seguinte resultado:
+
+                <div class="caixa" style="width: 100%; height: auto; display: flex; color: white; margin-top: 20px;">
+                    <div class="caixa-python">
+                        <span class="codigo" style="color: blueviolet;">from</span> sklearn.metrics <span class="codigo" style="color: blueviolet;">import</span> ConfusionMatrixDisplay <br>
+                        <br>
+                        print(classification_report(Y_test, Y_pred)) <br>
+                        cm = confusion_matrix(Y_test, Y_pred, labels=svc.classes_) <br>
+                        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=svc.classes_) <br>
+                        disp.plot() <br>
+                        plt.show()
+                    </div>  
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/precision.png" style="width: 50%; height: auto;" title="Resultado 3">
+                    <img src="Projetos/cafe/corr1.png" style="width: 50%; height: auto;" title="Gráfico 1">
+                </div>
+            </p>
+            <p>
+                Aplicando este modelo para os países chegamos a um resultado variádo, mas na maioria dos casos o modelo se mostrou preciso. Mesmo assim, um modelo 
+                para cada país se adaptará as características específicas do país e será superior.
+
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/corr10.png" style="width: 25%; height: auto;" title="Grafico 2">
+                    <img src="Projetos/cafe/corr11.png" style="width: 25%; height: auto;" title="Gráfico 3">
+                    <img src="Projetos/cafe/corr12.png" style="width: 25%; height: auto;" title="Gráfico 4">
+                    <img src="Projetos/cafe/corr13.png" style="width: 25%; height: auto;" title="Gráfico 5">
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/corr14.png" style="width: 25%; height: auto;" title="Grafico 6">
+                    <img src="Projetos/cafe/corr15.png" style="width: 25%; height: auto;" title="Gráfico 7">
+                    <img src="Projetos/cafe/corr16.png" style="width: 25%; height: auto;" title="Gráfico 8">
+                    <img src="Projetos/cafe/corr17.png" style="width: 25%; height: auto;" title="Gráfico 9">
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/corr4.png" style="width: 25%; height: auto;" title="Grafico 10">
+                    <img src="Projetos/cafe/corr5.png" style="width: 25%; height: auto;" title="Gráfico 11">
+                    <img src="Projetos/cafe/corr6.png" style="width: 25%; height: auto;" title="Gráfico 12">
+                    <img src="Projetos/cafe/corr7.png" style="width: 25%; height: auto;" title="Gráfico 13">
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <img src="Projetos/cafe/corr2.png" style="width: 25%; height: auto;" title="Grafico 14">
+                    <img src="Projetos/cafe/corr3.png" style="width: 25%; height: auto;" title="Gráfico 15">
+                    <img src="Projetos/cafe/corr8.png" style="width: 25%; height: auto;" title="Gráfico 16">
+                    <img src="Projetos/cafe/corr9.png" style="width: 25%; height: auto;" title="Gráfico 17">
+                </div>
+            </p>
+            <p>Obs: os países que não apareceram não foi possível fazer a modelagem</p>
+        </div>
+
+        <div class="rodape-secundario">
+            <a class="rodape-link"
+            href="https://github.com/PauloLaeber"><i class="fa-brands fa-github"></i></a>
+            <a class="rodape-link" 
+            href="https://www.linkedin.com/in/paulo-renato-batista-laeber-799804196/"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="rodape-link"
+            href="mailto:paulo.batistalaeber@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </body>
+</html>

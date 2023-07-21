@@ -1,0 +1,34 @@
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/caixa-de-codigo.css">
+
+        <script src="js/caixa-de-codigo.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div id="botaoAbrirCaixa" class="botao-abrir-caixa" onclick="botaoAbrirCaixa()">
+                Mostrar código
+            </div>
+            <div id="caixa" class="caixa" style="width: 800; height: 300;">
+                <div class="cabecario-caixa">
+                    <div class="aba-1" onclick="TrocaParaPython()">
+                        <p>Pyhton (3.11.3)</p>
+                    </div>
+                    <div class="aba-2" onclick="TrocaParaR()">
+                        <p>R (4.1.3)</p>
+                    </div>
+                    <div class="botao-fechar-caixa" onclick="botaoFecharCaixa()">
+                        <p>&#x2716;</p>
+                    </div>
+                </div>
+                <div id="codigo-python" class="codigo-python">
+                    <p>Este é o lugar do código Python</p>
+                </div>
+                <div id="codigo-r" class="codigo-r">
+                    <p>Este é o lugar do código R</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
